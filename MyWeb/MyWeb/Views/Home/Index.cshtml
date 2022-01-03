@@ -1,0 +1,86 @@
+﻿@{
+    ViewData["Title"] = "首頁";
+}
+
+@section styles{
+    <link href="~/css/templatemo-video-catalog.css" rel="stylesheet" />
+}
+
+
+<div class="container-fluid">
+    <div class="tm-page-wrap mx-auto">
+        <div class="position-relative">
+            <div class="tm-welcome-container tm-fixed-header tm-fixed-header-2">
+            </div>
+
+            <div id="tm-fixed-header-bg"></div> <!-- Header image -->
+        </div>
+
+        <!-- Page content -->
+        <main>
+            <div class="container-fluid px-0">
+                <div class="mx-auto tm-content-container">
+                    <div class="row mt-3 mb-5 pb-3">
+                        <div class="col-12">
+                            <div class=" tm-about-text-container">
+                                <img src="~/img/MVC_PPT.jpg" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="parallax-window" data-parallax="scroll" data-image-src="img/about-2.jpg"></div>
+
+                <div class="mx-auto tm-content-container mt-4 px-3">
+                    <div class="row tm-catalog-item-list mb-4">
+                        <div class="col-lg-4 col-md-6 col-sm-12 tm-catalog-item">
+                            <div class="tm-bg-gray p-4">
+                                <i class="far fa-newspaper fa-5x p-3 mb-4 tm-about-icon"></i>
+                                <h3 id="news0" class="tm-text-primary mb-3"></h3>
+                                <span id="content0"></span>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-12 tm-catalog-item">
+                            <div class="tm-bg-gray p-4">
+                                <i class="fas fa-newspaper fa-5x p-3 mb-4 tm-about-icon"></i>
+                                <h3 id="news1" class="tm-text-primary mb-3"></h3>
+                                <span id="content1"></span>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-12 tm-catalog-item">
+                            <div class="tm-bg-gray p-4">
+                                <i class="far fa-newspaper fa-5x p-3 mb-4 tm-about-icon"></i>
+                                <h3 id="news2" class="tm-text-primary mb-3"></h3>
+                                <span id="content2"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="parallax-window" data-parallax="scroll" data-image-src="img/about-3.jpg"></div>
+            </div>
+        </main>
+    </div>
+</div>
+
+
+@section Scripts{ 
+<script>
+    $(() => {
+        $.ajax({
+            url: 'https://gnews.io/api/v4/top-headlines?country=tw&token=170764413373ac4c7adbc271ba093dd6',
+            type: "get",
+            dataType: 'json',
+            success: function (info) {
+                console.log(info);
+                $("#news0").text(info.articles[2].title);
+                $("#content0").text(info.articles[2].content.split('...')[0]+"...(詳全文)");
+                $("#news1").text(info.articles[4].title);
+                $("#content1").text(info.articles[4].content.split('...')[0] + "...(詳全文)");
+                $("#news2").text(info.articles[6].title);
+                $("#content2").text(info.articles[6].content.split('...')[0] + "...(詳全文)");
+            },
+        });
+    })
+</script>
+}

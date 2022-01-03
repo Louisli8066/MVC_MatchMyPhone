@@ -1,0 +1,113 @@
+﻿@model MyWeb.Models.PhoneMaster
+
+@{
+    ViewData["Title"] = "詳細資訊";
+}
+
+
+<div class="container">
+    <main role="main" class="pb-3" style="font-size:larger">
+        <h1>詳細資訊</h1>
+        <hr />
+
+        <div class="row">
+            <div class="col-6">
+                <dl class="row" style="font-size:larger">
+                    <dt class="col-sm-4">
+                        手機型號
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.PhoneType)
+                    </dd>
+                    <dt class="col-sm-4">
+                        廠牌
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Brand)
+                    </dd>
+                    <dt class="col-sm-4">
+                        發售日期
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.ReleaseDate)
+                    </dd>
+                    <dt class="col-sm-4">
+                        官方價格
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Price)
+                    </dd>
+                    <dt class="col-sm-4">
+                        作業系統
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.RunSystem)
+                    </dd>
+                    <dt class="col-sm-4">
+                        處理器型號
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.RunType)
+                    </dd>
+                    <dt class="col-sm-4">
+                        RAM
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Ram) GB
+                    </dd>
+                    <dt class="col-sm-4">
+                        ROM
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Rom) GB
+                    </dd>
+                    <dt class="col-sm-4">
+                        電池容量
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Battery) mAh
+                    </dd>
+                    <dt class="col-sm-4">
+                        螢幕解析度
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.ScreenRes) pixels
+                    </dd>
+                    <dt class="col-sm-4">
+                        主鏡頭畫素
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.BackCamRes) 萬畫素
+                    </dd>
+                    <dt class="col-sm-4">
+                        前鏡頭畫素
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.FrontCamRes) 萬畫素
+                    </dd>
+                    <dt class="col-sm-4">
+                        傳輸埠
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.TransPort)
+                    </dd>
+                    <dt class="col-sm-4">
+                        手機重量
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Weight) g
+                    </dd>
+                </dl>
+            </div>
+            <div class="col-6 img-fluid">
+                <img Class="card-img-top pt-2" style="width:600px" src="~/images/@Html.DisplayFor(model => model.Image)" />
+            </div>
+        </div>
+    </main>
+    <div>
+        <a class="btn btn-info" asp-action="BackIndex"><i class="far fa-hand-point-left"></i>返回</a><br /><br />
+    </div>
+</div>
+
+
+    

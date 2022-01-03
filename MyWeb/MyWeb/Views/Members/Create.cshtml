@@ -1,0 +1,49 @@
+﻿@model MyWeb.Models.Member
+
+@{
+    ViewData["Title"] = "加入會員";
+}
+
+
+<div class="container">
+    <main role="main" class="pb-3" style="font-size:larger">
+        <h1>加入會員</h1>
+
+        <hr />
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-action="Create">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="Email" class="control-label"></label>
+                        <input asp-for="Email" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Password" class="control-label">密碼</label>
+                        <input asp-for="Password" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="UserName" class="control-label">姓名</label>
+                        <input asp-for="UserName" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="送出" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+    <div>
+        <a asp-action="Login"><i class="far fa-hand-point-left"></i>返回</a>
+    </div>
+</div>
+
+
+
+
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

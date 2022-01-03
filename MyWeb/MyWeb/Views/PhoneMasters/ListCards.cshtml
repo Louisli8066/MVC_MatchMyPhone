@@ -1,0 +1,66 @@
+﻿@model IEnumerable<MyWeb.Models.PhoneMaster>
+
+@{
+    ViewData["Title"] = "手機清單";
+}
+
+
+<div class="container">
+    <main role="main" class="pb-3" style="font-size:larger">
+        <form id="form1">
+            <h1>手機清單</h1>
+
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    篩選廠牌
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" asp-action="ListCards" asp-route-brand="all">All</a>
+                    <a class="dropdown-item" asp-action="ListCards" asp-route-brand="Apple">Apple</a>
+                    <a class="dropdown-item" asp-action="ListCards" asp-route-brand="Sony">Sony</a>
+                    <a class="dropdown-item" asp-action="ListCards" asp-route-brand="SAMSUNG">SAMSUNG</a>
+                    <a class="dropdown-item" asp-action="ListCards" asp-route-brand="Google">Google</a>
+                </div>
+            </div>
+
+            @foreach (var item in Model)
+            {
+                <div class="card m-2" style="display:inline-block">
+                    <img Class="card-img-top pt-2" style="width:300px" src="~/images/@item.Image" id="@item.Id" />
+                    <p class=" card-body card-text">
+                        <a asp-action="Details" asp-route-id="@item.Id">@item.PhoneType</a>
+                        <br />@item.Brand
+                    </p>
+                    <p class="card-footer text-center">
+                        <button class="btnPost btn btn-outline-info" value="@item.Id" onclick="AddCompare(@item.Id)" style="width:200px">加入比較</button>
+                    </p>
+                </div>
+            }
+        </form>
+    </main>
+</div>
+
+
+
+
+
+
+
+
+@section Scripts{
+    <script>
+
+        function AddCompare(pid) {
+            event.preventDefault();
+            fetch(`@Url.Content("~/api/MyProductLists")/${pid}`)
+                .then(response => response.json())
+                .then(s => swal({
+                    title: `${s}`,
+                    type: 'info',
+                    confirmButtonText: '好的'
+                }))  
+        };
+
+
+    </script>
+}

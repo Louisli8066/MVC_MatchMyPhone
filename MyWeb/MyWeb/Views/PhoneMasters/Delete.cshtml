@@ -1,0 +1,118 @@
+﻿@model MyWeb.Models.PhoneMaster
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+
+<div class="container">
+    <main role="main" class="pb-3" style="font-size:larger">
+        <h1>刪除</h1>
+
+        <div>
+            <hr />
+            <dl class="row">
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.PhoneType)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.PhoneType)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Brand)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Brand)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.ReleaseDate)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.ReleaseDate)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Price)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Price)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.RunSystem)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.RunSystem)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.RunType)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.RunType)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Ram)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Ram)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Rom)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Rom)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Battery)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Battery)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.ScreenRes)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.ScreenRes)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.BackCamRes)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.BackCamRes)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.FrontCamRes)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.FrontCamRes)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.TransPort)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.TransPort)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Weight)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Weight)
+                </dd>
+            </dl>
+
+            <form asp-action="Delete">
+                <input type="hidden" asp-for="Id" />
+                <input type="submit" value="刪除" class="btn btn-danger" onclick="return confirm('確定刪除?')" /><br /><br />
+                <a asp-action="BackIndex"><i class="far fa-hand-point-left"></i>返回</a>
+            </form>
+        </div>
+    </main>
+</div>
+
+
+
+
+
+@section scripts{ 
+<script>
+
+</script>
+}

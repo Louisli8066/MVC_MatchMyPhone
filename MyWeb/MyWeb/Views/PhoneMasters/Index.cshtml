@@ -1,0 +1,391 @@
+﻿@model IEnumerable<MyWeb.Models.PhoneMaster>
+
+@{
+    ViewData["Title"] = "比較清單";
+}
+<style>
+    th {
+        font-weight: bold;
+        color: dodgerblue;
+    }
+
+    tr:not(:first-child):hover {
+        background-color: lightgrey;
+        border-bottom:3px solid black;
+    }
+
+    .imgclass:hover {
+        -webkit-box-shadow: -3px 3px 5px #dddddd;
+        -moz-box-shadow: -3px 3px 5px #dddddd;
+        box-shadow: -3px 3px 5px #dddddd;
+    }
+
+    .del {
+        cursor: pointer;
+        position: relative;
+        top: -100px;
+        right: 0;
+        color: skyblue;
+    }
+
+        .del:hover {
+            background-color: lightgrey;
+            border-radius: 5px;
+        }
+
+    .nice {
+        font-style: italic;
+        font-weight: bold;
+        color: orangered;
+        font-size: larger;
+    }
+
+    th {
+        cursor: pointer;
+    }
+
+    .fc {
+        border: dashed 3px grey;
+    }
+</style>
+
+
+
+<div class="container">
+    <main role="main" class="pb-3" style="font-size:larger">
+        <h1>比較清單</h1>
+        <br />
+
+        <div class="container">
+            <form asp-action="Index">
+                <table class="table col col-md-12">
+                    <tbody class="col-lg-12 ">
+                        <tr>
+                            <th></th>
+                            @foreach (var item in Model)
+                            {
+
+                                <td class="justify-content-center">
+                                    <img class="imgclass" style="width:300px" src="~/images/@item.Image" />
+                                    @*<button class="del" onclick="DeleteCompare(@item.Id)"><i class="far fa-trash-alt"></i></button>*@
+                                    <i class="del far fa-trash-alt" onclick="DeleteCompare(@item.Id)"></i>
+                                </td>
+                            }
+                        </tr>
+                        <tr>
+                            <th>手機型號</th>
+                            @foreach (var item in Model)
+                            {
+                                <td class="justify-content-center">@item.PhoneType</td>
+                            }
+                        </tr>
+                        <tr>
+                            <th>廠牌</th>
+                            @foreach (var item in Model)
+                            {
+                                <td class="justify-content-center">@item.Brand</td>
+                            }
+                        </tr>
+                        <tr>
+                            <th>發售時間</th>
+                            @foreach (var item in Model)
+                            {
+                                <td class="justify-content-center">@item.ReleaseDate.ToString("yyyy/MM")</td>
+                            }
+                        </tr>
+                        <tr>
+                            <th onclick="priceClick()">官方價格<i class="fas fa-crown"></i></th>
+                            @{
+
+                                int min = 1000000;
+                                foreach (var item in Model)
+                                {
+                                    if (min > item.Price)
+                                    {
+                                        min = item.Price;
+                                    }
+
+                                }
+
+                                foreach (var item in Model)
+                                {
+                                    if (item.Price == min)
+                                    {
+                                        <td id="minPrice" class="justify-content-center">$ @item.Price</td>
+                                    }
+                                    else
+                                    {
+                                        <td class="justify-content-center">$ @item.Price</td>
+                                    }
+                                }
+                            }
+                        </tr>
+                        <tr>
+                            <th>作業系統</th>
+                            @foreach (var item in Model)
+                            {
+                                <td class="justify-content-center">@item.RunSystem</td>
+                            }
+                        </tr>
+                        <tr>
+                            <th>處理器型號</th>
+                            @foreach (var item in Model)
+                            {
+                                <td class="justify-content-center">@item.RunType</td>
+                            }
+                        </tr>
+                        <tr>
+                            <th onclick="ramClick()">Ram<i class="fas fa-crown"></i></th>
+                            @{
+
+                                int max = 0;
+                                foreach (var item in Model)
+                                {
+                                    if (max < Convert.ToInt32(item.Ram))
+                                    {
+                                        max = Convert.ToInt32(item.Ram);
+                                    }
+
+                                }
+
+                                foreach (var item in Model)
+                                {
+                                    if (int.Parse(item.Ram) == max)
+                                    {
+                                        <td id="maxRam" class="justify-content-center">@item.Ram GB</td>
+                                    }
+                                    else
+                                    {
+                                        <td class="justify-content-center">@item.Ram GB</td>
+                                    }
+                                }
+                            }
+
+                        </tr>
+                        <tr>
+                            <th onclick="romClick()">Rom<i class="fas fa-crown"></i></th>
+                            @{
+
+                                int Rommax = 0;
+                                foreach (var item in Model)
+                                {
+                                    if (Rommax < Convert.ToInt32(item.Rom))
+                                    {
+                                        Rommax = Convert.ToInt32(item.Rom);
+                                    }
+
+                                }
+
+                                foreach (var item in Model)
+                                {
+                                    if (int.Parse(item.Rom) == Rommax)
+                                    {
+                                        <td id="maxRom" class="justify-content-center">@item.Rom GB</td>
+                                    }
+                                    else
+                                    {
+                                        <td class="justify-content-center">@item.Rom GB</td>
+                                    }
+                                }
+                            }
+                        </tr>
+                        <tr>
+                            <th onclick="batteryClick()">電池容量<i class="fas fa-crown"></i></th>
+                            @{
+
+                                int batmax = 0;
+                                foreach (var item in Model)
+                                {
+                                    if (batmax < Convert.ToInt32(item.Battery))
+                                    {
+                                        batmax = Convert.ToInt32(item.Battery);
+                                    }
+
+                                }
+
+                                foreach (var item in Model)
+                                {
+                                    if (int.Parse(item.Battery) == batmax)
+                                    {
+                                        <td id="maxBattery" class="justify-content-center">@item.Battery mAh</td>
+                                    }
+                                    else
+                                    {
+                                        <td class="justify-content-center">@item.Battery mAh</td>
+                                    }
+                                }
+                            }
+                        </tr>
+                        <tr>
+                            <th>螢幕解析度</th>
+                            @foreach (var item in Model)
+                            {
+                                <td class="justify-content-center">@item.ScreenRes pixels</td>
+                            }
+                        </tr>
+                        <tr>
+                            <th>主鏡頭畫素</th>
+                            @foreach (var item in Model)
+                            {
+                                <td class="justify-content-center">@item.BackCamRes 萬畫素</td>
+                            }
+                        </tr>
+                        <tr>
+                            <th>前置鏡頭畫素</th>
+                            @foreach (var item in Model)
+                            {
+                                <td class="justify-content-center">@item.FrontCamRes 萬畫素</td>
+                            }
+                        </tr>
+                        <tr>
+                            <th>傳輸埠</th>
+                            @foreach (var item in Model)
+                            {
+                                <td class="justify-content-center">@item.TransPort</td>
+                            }
+                        </tr>
+                        <tr>
+                            <th onclick="wClick()">手機重量<i class="fas fa-crown"></i></th>
+                            @{
+
+                                int Wmin = 10000;
+                                foreach (var item in Model)
+                                {
+                                    if (Wmin > int.Parse(item.Weight))
+                                    {
+                                        Wmin = int.Parse(item.Weight);
+                                    }
+
+                                }
+
+                                foreach (var item in Model)
+                                {
+                                    if (int.Parse(item.Weight) == Wmin)
+                                    {
+                                        <td id="minWeight" class="justify-content-center">@item.Weight g</td>
+                                    }
+                                    else
+                                    {
+                                        <td class="justify-content-center">@item.Weight g</td>
+                                    }
+                                }
+                            }
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+    </main>
+</div>
+
+
+
+
+
+@section Scripts{
+    <script>
+            var fcbool = true;
+            var rambool = true;
+            function ramClick() {
+                if (rambool) {
+                    $("#maxRam").addClass("nice");
+                    rambool = false;
+                }
+                else {
+                    $("#maxRam").removeClass("nice");
+                    rambool = true;
+                }
+            }
+
+        var rombool = true;
+        function romClick() {
+            if (rombool) {
+                $("#maxRom").addClass("nice");
+                rombool = false;
+            }
+            else {
+                $("#maxRom").removeClass("nice");
+                rombool = true;
+            }
+        }
+
+            var pricebool = true;
+            function priceClick() {
+                if (pricebool) {
+                    $("#minPrice").addClass("nice");
+                    pricebool = false;
+                }
+                else {
+                    $("#minPrice").removeClass("nice");
+                    pricebool = true;
+                }
+            }
+
+        var batbool = true;
+        function batteryClick() {
+            if (batbool) {
+                $("#maxBattery").addClass("nice");
+                batbool = false;
+            }
+            else {
+                $("#maxBattery").removeClass("nice");
+                batbool = true;
+            }
+        }
+
+        var wbool = true;
+        function wClick() {
+            if (wbool) {
+                $("#minWeight").addClass("nice");
+                wbool = false;
+            }
+            else {
+                $("#minWeight").removeClass("nice");
+                wbool = true;
+            }
+        }
+
+        //$("th").click(function () {
+        //    if (fcbool) {
+        //        $(this).parent().addClass("fc");
+        //        fcbool = false;
+        //    } else {
+        //        $(this).parent().removeClass("fc");
+        //        fcbool = true;
+        //    }
+        //});
+
+
+
+
+
+        function DeleteCompare(pid) {
+                swal({
+                    title: '確認移出清單?',
+                    type: 'question',
+                    showCancelButton: true,
+                    cancelButtonText: '取消',
+                    confirmButtonText: '確定',
+                    //focusConfirm: false,
+                    //async: false,
+                }).then(function (result) {
+                    if (result) {
+                        fetch(`@Url.Content("~/api/MyProductLists/delete")/${pid}`)
+                            .then(response => {
+                                if (response.statusText == "OK") {
+                                    location.reload();
+                                }
+                            })
+                            //FETCH後.then要用箭頭函式，不然執行序會亂掉
+                            //.then(
+                            //    item => {
+                            //        console.log(item);
+                            //        location.reload();
+                            //    }
+                            //);
+                    }
+                });
+
+        };
+    </script>
+}

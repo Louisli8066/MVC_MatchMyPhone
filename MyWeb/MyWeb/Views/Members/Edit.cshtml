@@ -1,0 +1,49 @@
+﻿@model MyWeb.Models.Member
+
+@{
+    ViewData["Title"] = "修改";
+}
+
+
+<div class="container">
+    <main role="main" class="pb-3" style="font-size:larger">
+        <h1>修改個人資料</h1>
+
+        <hr />
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <form asp-action="Edit">
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                        <input type="hidden" asp-for="Id" />
+                        <div class="form-group">
+                            <label asp-for="Email" class="control-label"></label>
+                            <input readonly asp-for="Email" class="form-control" value="@ViewBag.Email" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Password" class="control-label"></label>
+                            <input asp-for="Password" class="form-control" />
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="UserName" class="control-label"></label>
+                            <input asp-for="UserName" class="form-control" value="@ViewBag.name" />
+                            <span asp-validation-for="UserName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group align-content-between">
+                            <input type="submit" value="儲存" class="btn btn-primary btn-lg" />
+                            <a class="btn btn-warning btn-lg" style="color:white" asp-action="Details">取消</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

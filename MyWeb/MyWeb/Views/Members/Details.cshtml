@@ -1,0 +1,75 @@
+﻿@model MyWeb.Models.Member
+
+@{
+    ViewData["Title"] = "個人資料";
+}
+
+
+<div class="container">
+    <main role="main" class="pb-3" style="font-size:larger">
+        <h1>個人資料</h1>
+
+        <div>
+            <hr />
+            <dl class="row" style="font-size:larger">
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Email)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Email)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Password)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Password)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.UserName)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.UserName)
+                </dd>
+            </dl>
+        </div>
+        <div>
+            <a class="btn btn-outline-warning btn-lg" asp-action="Edit" asp-route-id="@Model.Id">修改個人資料</a>
+            <button class="btn btn-outline-danger btn-lg ml-4" onclick="LogoutCheck()">登出</button>
+        </div>
+    </main>
+</div>
+
+
+
+
+@section Scripts{
+    <script>
+
+        function LogoutCheck() {
+                swal({
+                    title: '確認登出?',
+                    type: 'question',
+                    showCancelButton: true,
+                    cancelButtonText: '取消',
+                    confirmButtonText: '確定',
+
+                }).then(function () {
+
+                        $.ajax({
+                            type: 'POST',
+                            url: "@Url.Action("Logout")",
+                            contentType: "application/json;utf-8",
+                            dataType: "json",
+                            async: false,
+                            success: function (result) {
+                                location.href = "/Home/Index"; 
+
+                            },
+                            error: function () {
+                                //location.href = "/Home/Index";
+                            }
+                        });
+                });
+        };
+    </script>
+}

@@ -1,0 +1,71 @@
+﻿@model IEnumerable<MyWeb.Models.PhoneMaster>
+
+@{
+    ViewData["Title"] = "BackIndex";
+}
+<style>
+tr:not(#firstLine):hover{
+    background-color:lightgrey;
+}
+</style>
+
+
+<div class="container">
+    <main role="main" class="pb-3" style="font-size:larger">
+        <h1>資料清單</h1>
+
+        <p>
+            <a asp-action="Create"><i class="fas fa-plus-circle"></i>新增手機資料</a>
+        </p>
+        <div class="">
+            <table class="table">
+                <thead>
+                    <tr id="firstLine">
+                        <th>
+                            手機型號
+                        </th>
+                        <th>
+                            廠牌
+                        </th>
+                        <th>
+                            發售日期
+                        </th>
+                        <th>
+                            官方價格
+                        </th>
+                        <th>
+                            功能
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td style="font-size:1.2em;color:deepskyblue">
+                                @Html.DisplayFor(modelItem => item.PhoneType)<br />
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Brand)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ReleaseDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Price)
+                            </td>
+
+                            <td>
+                                <a class="float-left" asp-action="Edit" asp-route-id="@item.Id"><i class="fas fa-edit">&nbsp;&nbsp;&nbsp;</i></a>
+                                <a class="float-left" asp-action="BackendDetails" asp-route-id="@item.Id"><i class="fas fa-info-circle">&nbsp;&nbsp;&nbsp;</i>  </a>
+                                <a class="float-left" asp-action="Delete" asp-route-id="@item.Id"><i class="far fa-trash-alt">&nbsp;&nbsp;&nbsp;</i>  </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </main>
+</div>
+
+

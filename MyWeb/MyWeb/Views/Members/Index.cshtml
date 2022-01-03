@@ -1,0 +1,52 @@
+﻿@model IEnumerable<MyWeb.Models.Member>
+
+@{
+    ViewData["Title"] = "會員資訊";
+}
+
+
+<div class="container">
+    <main role="main" class="pb-3" style="font-size:larger">
+
+        <h1>會員資訊</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Email)
+                    </th>
+                    <th>
+                        密碼
+                    </th>
+                    <th>
+                        姓名
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Password)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UserName)
+                        </td>
+                        <td>
+                            <a asp-action="BackEdit" asp-route-id="@item.Id"><i class="fas fa-edit">&nbsp;&nbsp;&nbsp;</i></a> |
+                            <a asp-action="BackDetails" asp-route-id="@item.Id"><i class="fas fa-info-circle">&nbsp;&nbsp;&nbsp;</i></a> |
+                            <a asp-action="Delete" asp-route-id="@item.Id"><i class="far fa-trash-alt">&nbsp;&nbsp;&nbsp;</i></a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </main>
+</div>
+
+

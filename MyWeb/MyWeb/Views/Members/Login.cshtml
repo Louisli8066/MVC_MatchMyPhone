@@ -1,0 +1,64 @@
+﻿@model MyWeb.Models.Member
+
+@{
+    ViewData["Title"] = "會員登入";
+}
+
+
+
+<div class="container">
+    <main role="main" class="pb-3" style="font-size:larger">
+        <h1>登入</h1>
+
+        <hr />
+        <div class="row">
+            <div class="col-md-6">
+                <form asp-action="Login">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="Email" class="control-label"></label>
+                        <input asp-for="Email" class="form-control" id="email" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Password" class="control-label">密碼</label>
+                        <input asp-for="Password" class="form-control" id="password" />
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" value="登入" class="btn btn-primary btn-lg" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="button" value="DEMO Admin" id="demo" class="btn btn-success btn-lg" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="button" value="DEMO Tourist" id="demo2" class="btn btn-warning btn-lg" />
+                        <br /><br />
+                        <a asp-action="Create"><h5>還不是會員嗎? 點我加入</h5></a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+    <div>
+        <a asp-controller="Home" asp-action="Index">返回首頁</a><br />
+    </div>
+</div>
+
+
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+<script>
+    $(() => {
+        $("#demo").click(() => {
+            $("#email").val("a80665308@gmail.com");
+            $("#password").val("123");
+        });
+
+        $("#demo2").click(() => {
+            $("#email").val("1@a");
+            $("#password").val("111");
+        });
+    })
+</script>
+
+
+}

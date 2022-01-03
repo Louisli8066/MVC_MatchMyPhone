@@ -1,0 +1,105 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Match My Phone</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link href="~/css/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="~/css/sweetalert2.min.css" rel="stylesheet" />
+    @*<link href="~/css/util.css" rel="stylesheet" />*@
+    <link href="~/css/main.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    @await RenderSectionAsync("Styles", required: false)
+</head>
+<body>
+    <header style="position:fixed;z-index:99999;width:100%">
+        <nav style="height:120px" class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
+            <div class="container">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div style="font-size:larger" class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index"><i class="fa fa-home"></i>首頁</a>
+                        </li>
+                        <li class="nav-item ml-4">
+                            <a class="nav-link text-white" asp-area="" asp-controller="PhoneMasters" asp-action="ListCards"><i class="fas fa-mobile-alt"></i> 所有手機</a>
+                        </li>
+                        <li class="nav-item ml-4">
+                            <a class="nav-link text-white" asp-area="" asp-controller="PhoneMasters" asp-action="Index"><i class="fas fa-mobile-alt"></i> 我的比較清單</a>
+                        </li>
+                        @{
+                            if (ViewBag.id == 1)
+                            {
+                                <li class="nav-item ml-4">
+                                    <a class="nav-link text-white" asp-area="" asp-controller="PhoneMasters" asp-action="BackIndex"><i class="fab fa-fort-awesome-alt"></i> 資料管理</a>
+                                </li>
+                                <li class="nav-item ml-4">
+                                    <a class="nav-link text-white" asp-area="" asp-controller="members" asp-action="Index"><i class="fab fa-fort-awesome-alt"></i> 會員資料</a>
+                                </li>
+                            }
+                        }
+
+                    </ul>
+                    @{
+                        if (ViewBag.name == null)
+                        {
+                            <a id="login" class="nav-link text-white" asp-area="" asp-controller="Members" asp-action="Login"><i class="fas fa-child"></i>登入</a>
+                        }
+                        else
+                        {
+                            <p style="color:white">您好！ <a style="color:white" asp-controller="Members" asp-action="Details">@ViewBag.name</a></p>
+
+                        }
+                    }
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div style="padding-top:120px">
+        @RenderBody()
+    </div>
+
+
+    <footer class="bg3" style="height:200px;">
+        <div class="container">
+            <div class="row justify-content-center" style="padding-top:50px">
+                <div class="col-sm-6">
+                    <h4 class="stext-301 cl0 p-b-30">
+                        需要協助?
+                    </h4>
+                    <ul>
+                        <li class="p-b-10">
+                            <a href="" class="stext-107 cl7 hov-cl1 trans-04">
+                                請來信至小編信箱：aa@@gmail.com
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-sm-6 col-lg-3 p-b-50">
+                    <h4 class="stext-301 cl0 p-b-30">
+                        追蹤我們
+                    </h4>
+
+                    <p class="stext-107 cl7 size-201">
+                        請發摟我們的臉書、IG<br />
+                        <i class="fab fa-facebook"></i>     <i class="fab fa-instagram"></i>
+                    </p>
+
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/sweetalert2.min.js"></script>
+    <script src="~/js/parallax.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
